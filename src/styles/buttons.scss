@@ -1,0 +1,39 @@
+.createNew {
+	background-color: midnightblue;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.autoSaveTag {
+    color: green;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px;
+    opacity: 0;
+    background-color: gold;
+    animation-name: showAutoSave;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+}
+
+@keyframes showAutoSave {
+    0%   {background-color: transparent; opacity: 0.5;}
+    20%  {background-color: transparent; opacity: 1;}
+    40%  {background-color: gold; opacity: 1;}
+    60%  {background-color: gold; opacity: 1;}
+    80%  {background-color: transparent; opacity: 1;}
+    100% {background-color: transparent; opacity: 0;}
+}
+
+.show {
+    opacity: 0;
+    background-color: gold;
+    animation-name: showAutoSave;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+}

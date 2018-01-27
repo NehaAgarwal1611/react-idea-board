@@ -1,0 +1,18 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 16px;
+}
+
+.ideaBoard {
+	width: 750px;
+	margin: 20px auto 0;
+	padding: 20px 40px;
+	background: url('../images/main.jpg') no-repeat;
+	background-size: cover;
+}
