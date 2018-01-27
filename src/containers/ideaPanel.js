@@ -13,7 +13,8 @@ export default class IdeaPanel extends Component {
 		this.state = {
 			entries: [],
 			key: Date.now(),
-			hasListUpdated: false
+			hasListUpdated: false,
+			nextUpdate: true
 		}
 		this.addNew = this.addNew.bind(this);
 		this.clearIdea = this.clearIdea.bind(this);
@@ -31,12 +32,12 @@ export default class IdeaPanel extends Component {
 			hasListUpdated: true
 		})
 
-		// var self = this;
-		// setTimeout(function(){
-		// 	self.setState({
-		// 		hasListUpdated: false
-		// 	})
-		// }, 300);
+		var self = this;
+		setTimeout(function(){
+			self.setState({
+				hasListUpdated: false
+			})
+		}, 500);
 	}
 	clearIdea(key) {
 		var newIdeaArray = this.state.entries.filter(function(item){
@@ -47,24 +48,23 @@ export default class IdeaPanel extends Component {
 			entries: newIdeaArray,
 			hasListUpdated: true
 		})
-		// var self = this;
-		// setTimeout(function(){
-		// 	self.setState({
-		// 		hasListUpdated: false
-		// 	})
-		// }, 300);
+
+		var self = this;
+		setTimeout(function(){
+			self.setState({
+				hasListUpdated: false
+			})
+		}, 500);
 		
 	}
-	//{ this.state.hasListUpdated && <span ref={(el) => { this.save = el; }} className='autoSaveTag'>All Changes Saved</span>}
-
-	
+		
 	render() {
 		return(
 			<div className='ideaPanel'>
 				<div className='ideaPanelHeader'>
 					<NewIdeaButton addNew={this.addNew} />
 					<SortIdeas />
-					<SaveButton />
+					{ this.state.hasListUpdated && <SaveButton /> }
 				</div>
 				<IdeaList entries={this.state.entries} listUpdated={this.listUpdated} />
 			</div>
