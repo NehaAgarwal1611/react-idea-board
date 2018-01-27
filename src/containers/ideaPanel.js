@@ -18,11 +18,12 @@ export default class IdeaPanel extends Component {
 		}
 		this.addNew = this.addNew.bind(this);
 		this.clearIdea = this.clearIdea.bind(this);
+		this.changeInField = this.changeInField.bind(this);
 	}
 	addNew(e) {
 		let ideaArray = this.state.entries;
 		let newValue = this.state.key;
-		let item = <NewIdea key={newValue} id={newValue} clearIdea={this.clearIdea} />;
+		let item = <NewIdea key={newValue} id={newValue} clearIdea={this.clearIdea} changeInField={this.changeInField} />;
 
 		ideaArray.push(item);
 
@@ -56,6 +57,9 @@ export default class IdeaPanel extends Component {
 			})
 		}, 500);
 		
+	}
+	changeInField(key) {
+		console.log(key);
 	}
 		
 	render() {
