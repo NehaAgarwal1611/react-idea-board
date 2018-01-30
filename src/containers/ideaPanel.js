@@ -18,6 +18,8 @@ export default class IdeaPanel extends Component {
 		this.addNew = this.addNew.bind(this);
 		this.clearIdea = this.clearIdea.bind(this);
 		this.changeInField = this.changeInField.bind(this);
+		this.sortByAlphabet = this.sortByAlphabet.bind(this);
+		this.sortByDate = this.sortByDate.bind(this);
 	}
 	addNew(e) {
 		let ideaArray = this.state.entries;
@@ -70,13 +72,19 @@ export default class IdeaPanel extends Component {
 			})
 		}, 500);
 	}
+	sortByAlphabet() {
+		alert("alpha");
+	}
+	sortByDate() {
+		alert("date");
+	}
 		
 	render() {
 		return(
 			<div className='ideaPanel'>
 				<div className='ideaPanelHeader'>
 					<NewIdeaButton addNew={this.addNew} />
-					<SortIdeas />
+					<SortIdeas sortByAlphabet={this.sortByAlphabet} sortByDate={this.sortByDate} />
 					{ this.state.hasListUpdated && <SaveButton /> }
 				</div>
 				<IdeaList entries={this.state.entries} clearIdea={this.clearIdea} changeInField={this.changeInField} listUpdated={this.listUpdated} />
