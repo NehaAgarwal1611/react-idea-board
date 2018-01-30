@@ -4,7 +4,7 @@ import Transition from 'react-transition-group/Transition';
 import NewIdeaButton from '../components/newIdeaButton';
 import SortIdeas from '../components/sortIdeas';
 import IdeaList from '../containers/ideaList';
-import NewIdea from '../components/newIdea';
+//import NewIdea from '../components/newIdea';
 import SaveButton from '../components/saveButton';
 
 export default class IdeaPanel extends Component {
@@ -13,9 +13,7 @@ export default class IdeaPanel extends Component {
 		this.state = {
 			entries: [],
 			hasListUpdated: false,
-			nextUpdate: true,
-			title: '',
-			desc: ''
+			nextUpdate: true
 		}
 		this.addNew = this.addNew.bind(this);
 		this.clearIdea = this.clearIdea.bind(this);
@@ -25,8 +23,8 @@ export default class IdeaPanel extends Component {
 		let ideaArray = this.state.entries;
 		
 		ideaArray.push({
-			title: this.state.title,
-			desc: this.state.desc,
+			title: '',
+			desc: '',
 			key: Date.now()
 		})
 
@@ -57,34 +55,20 @@ export default class IdeaPanel extends Component {
 			self.setState({
 				hasListUpdated: false
 			})
-		}, 500);		
+		}, 500);
 	}
-	changeInField(class_name, value, title, desc, key) {
-		let ideaArray = this.state.entries;
-		const classname = class_name;
-		const textValue = value;
-		const previousTitleValue = title;
-		const previousDescValue = desc;
-
-		ideaArray.map((item, index) => {
-			if(key == item.key) {
-				this.setState({
-					title: previousTitleValue,
-					desc: previousDescValue
-				})
-				if(classname === 'ideaHeading') {
-					this.setState({
-						title: title + textValue
-					})
-					item.title = this.state.title;
-				} else if (classname === 'ideaDesc') {
-					this.setState({
-						desc: desc + textValue
-					})
-					item.desc = this.state.desc;
-				}
-			}
+	changeInField(ideaArray) {
+		this.setState({
+			entries: ideaArray,
+			hasListUpdated: true
 		})
+
+		var self = this;
+		setTimeout(function(){
+			self.setState({
+				hasListUpdated: false
+			})
+		}, 500);
 	}
 		
 	render() {
