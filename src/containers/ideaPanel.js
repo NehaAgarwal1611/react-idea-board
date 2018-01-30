@@ -4,7 +4,6 @@ import Transition from 'react-transition-group/Transition';
 import NewIdeaButton from '../components/newIdeaButton';
 import SortIdeas from '../components/sortIdeas';
 import IdeaList from '../containers/ideaList';
-//import NewIdea from '../components/newIdea';
 import SaveButton from '../components/saveButton';
 
 export default class IdeaPanel extends Component {
@@ -41,6 +40,7 @@ export default class IdeaPanel extends Component {
 				hasListUpdated: false
 			})
 		}, 500);
+
 	}
 	clearIdea(key) {
 		var newIdeaArray = this.state.entries.filter(function(item){
@@ -73,10 +73,40 @@ export default class IdeaPanel extends Component {
 		}, 500);
 	}
 	sortByAlphabet() {
-		alert("alpha");
+		var arr = this.state.entries;
+		arr.sort(function(a, b) {
+			var ideaA = a.title.toLowerCase(),
+				ideaB = b.title.toLowerCase();
+
+			if(ideaA < ideaB) {
+				return -1
+			}
+			if(ideaA > ideaB) {
+				return 1
+			}
+			return 0;
+		})
+		this.setState({
+			entries: arr
+		})
 	}
 	sortByDate() {
-		alert("date");
+		var arr = this.state.entries;
+		arr.sort(function(a, b) {
+			var ideaA = a.key,
+				ideaB = b.key;
+
+			if(ideaA < ideaB) {
+				return -1
+			}
+			if(ideaA > ideaB) {
+				return 1
+			}
+			return 0;
+		})
+		this.setState({
+			entries: arr
+		})
 	}
 		
 	render() {
