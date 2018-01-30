@@ -12,9 +12,10 @@ export default class IdeaPanel extends Component {
 		super();
 		this.state = {
 			entries: [],
-			key: Date.now(),
 			hasListUpdated: false,
-			nextUpdate: true
+			nextUpdate: true,
+			title: '',
+			desc: ''
 		}
 		this.addNew = this.addNew.bind(this);
 		this.clearIdea = this.clearIdea.bind(this);
@@ -22,14 +23,15 @@ export default class IdeaPanel extends Component {
 	}
 	addNew(e) {
 		let ideaArray = this.state.entries;
-		let newValue = this.state.key;
-		let item = <NewIdea key={newValue} id={newValue} clearIdea={this.clearIdea} changeInField={this.changeInField} />;
-
-		ideaArray.push(item);
+		
+		ideaArray.push({
+			title: this.state.title,
+			desc: this.state.desc,
+			key: Date.now()
+		})
 
 		this.setState({
 			entries: ideaArray,
-			key: Date.now(),
 			hasListUpdated: true
 		})
 
@@ -42,7 +44,7 @@ export default class IdeaPanel extends Component {
 	}
 	clearIdea(key) {
 		var newIdeaArray = this.state.entries.filter(function(item){
-			return (item.key !== key.toString());
+			return (item.key !== key);
 		})
 
 		this.setState({
@@ -55,11 +57,34 @@ export default class IdeaPanel extends Component {
 			self.setState({
 				hasListUpdated: false
 			})
-		}, 500);
-		
+		}, 500);		
 	}
-	changeInField(key) {
-		console.log(key);
+	changeInField(class_name, value, title, desc, key) {
+		let ideaArray = this.state.entries;
+		const classname = class_name;
+		const textValue = value;
+		const previousTitleValue = title;
+		const previousDescValue = desc;
+
+		ideaArray.map((item, index) => {
+			if(key == item.key) {
+				this.setState({
+					title: previousTitleValue,
+					desc: previousDescValue
+				})
+				if(classname === 'ideaHeading') {
+					this.setState({
+						title: title + textValue
+					})
+					item.title = this.state.title;
+				} else if (classname === 'ideaDesc') {
+					this.setState({
+						desc: desc + textValue
+					})
+					item.desc = this.state.desc;
+				}
+			}
+		})
 	}
 		
 	render() {
@@ -70,7 +95,7 @@ export default class IdeaPanel extends Component {
 					<SortIdeas />
 					{ this.state.hasListUpdated && <SaveButton /> }
 				</div>
-				<IdeaList entries={this.state.entries} listUpdated={this.listUpdated} />
+				<IdeaList entries={this.state.entries} clearIdea={this.clearIdea} changeInField={this.changeInField} listUpdated={this.listUpdated} />
 			</div>
 		);
 	}
