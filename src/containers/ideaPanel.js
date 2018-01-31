@@ -117,7 +117,7 @@ export default class IdeaPanel extends Component {
 					<SortIdeas sortByAlphabet={this.sortByAlphabet} sortByDate={this.sortByDate} />
 					{ this.state.hasListUpdated && <SaveButton /> }
 				</div>
-				<IdeaList entries={this.state.entries} clearIdea={this.clearIdea} changeInField={this.changeInField} listUpdated={this.listUpdated} />
+				<IdeaList entries={this.state.entries} clearIdea={this.clearIdea} changeInField={this.changeInField} />
 			</div>
 		);
 	}
